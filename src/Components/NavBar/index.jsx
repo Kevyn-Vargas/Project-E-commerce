@@ -1,16 +1,20 @@
 import { NavLink } from "react-router-dom";
-// bg-emerald-600
-//bg-teal-700
-//bg-cyan-700-800
-//bg-sky-800
+import { useContext } from "react";
+import { ShoppingCartContext } from "../../Context";
+import { ShoppingCartIcon } from '@heroicons/react/24/solid'
+import { UserIcon } from '@heroicons/react/24/solid'
+import { HeartIcon } from '@heroicons/react/24/solid'
+
 function NavBar() {
-  const activeStyle = "underline underline-offset-8";
+  const activeStyle = "flex underline underline-offset-8";
+  const accountFlex = "flex"
+  const context = useContext(ShoppingCartContext)
   return (
     <nav className="bg-teal-700 flex justify-between items-center fixed z-10 top-0 w-full py-5 px-8 font-medium text-base font-quicksand">
       <ul className="flex items-center gap-3">
         <li className="font-semibold text-2xl">
           <NavLink to="/">KVStore</NavLink>
-        </li>
+        </li> |
         <li>
           <NavLink
             to="/"
@@ -62,38 +66,31 @@ function NavBar() {
       </ul>
 
       <ul className="flex items-center gap-3">
-        <li>Search</li>
+        <li>USD</li>|
+        <li>
+          <NavLink
+            className={({ isActive }) => (isActive ? activeStyle : accountFlex)}
+            to="/account"
+          >
+            <UserIcon className="size-6"></UserIcon>
+            <span className="px-1">Account</span>
+          </NavLink>
+        </li>|
         <li>
           <NavLink
             className={({ isActive }) => (isActive ? activeStyle : undefined)}
             to="/like"
-          >
-            🖤
+          ><div>
+            <HeartIcon className="size-6"></HeartIcon>
+          </div>
           </NavLink>
-        </li>
+        </li>|
         <li>
           <NavLink
-            className={({ isActive }) => (isActive ? activeStyle : undefined)}
+            className="flex"
             to="/shopping-cart"
           >
-            🛒 0
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            className={({ isActive }) => (isActive ? activeStyle : undefined)}
-            to="/account"
-          >
-            Account
-          </NavLink>
-        </li>
-        <li>USD</li>
-        <li>
-          <NavLink
-            className={({ isActive }) => (isActive ? activeStyle : undefined)}
-            to="/sign-in"
-          >
-            Sing In
+            <ShoppingCartIcon className="size-7 text-black"></ShoppingCartIcon><span className="px-1">{context.count}</span>
           </NavLink>
         </li>
       </ul>

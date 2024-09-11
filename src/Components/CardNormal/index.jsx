@@ -1,6 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { ShoppingCartContext } from "../../Context";
+import { PlusIcon } from '@heroicons/react/24/solid'
+import { EyeIcon } from '@heroicons/react/24/solid'
 
 function CardNormal({ data }) {
+  const context = useContext(ShoppingCartContext);
   const [categoria, setCategoria] = useState(null);
   const [imagen, setImagen] = useState(null);
   const [title, setTitle] = useState(null);
@@ -29,52 +33,46 @@ function CardNormal({ data }) {
     }
   }, [data]);
 
-  console.log(data);
+  const handleProductoClick = () => {
+    let producto = data
+    context.setProductoSeleccionado(producto)
+    // Esto hace que cada vez que se de cilck en algun producto guarde la informacion del obejto en la variable "producto" del contexto, asi puedo mostrarlo en el modal.
+  };
 
   return (
-    <div className="bg-white cursor-pointer w-56 h-60">
-      <figure className="relative mb-2 w-full h-4/5">
-        <span className="absolute bottom-0 left-0 bg-white/60 roundend-lg text-black text-xs m-2 px-3 py-0.5">
+    <div
+      className="bg-gradient-to-tr from-black to-gray-300 relative w-60 h-64 rounded-lg"
+    ><figure
+      className="relative w-full h-full">
+        <img
+          className="w-full h-full object-cover rounden-lg mix-blend-multiply"
+          //w-full h-full object-cover rounden-lg mix-blend-multiply
+          src={imagen}
+          alt="..."
+        />
+        <p className="flex flex-col items-end absolute top-5 right-5">
+          <span className="text-white text-xs">Price</span>
+          <span className="text-white text-lg font-medium">${price}</span>
+        </p>
+
+        <span className="w-3/4 text-base font-medium text-white absolute bottom-20 left-5">{title}</span>
+        <span className="absolute bottom-12 left-3 pl-0 text-gray-400 text-xs m-2 px-3 py-0.5">
           {categoria
             ? data.category.charAt(0).toUpperCase() + data.category.slice(1)
             : "Waiting..."}
         </span>
-        <img
-          className="w-full h-full object-cover rounden-lg"
-          src={imagen}
-          alt="Headphones"
-        />
-        <div className="absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 p-1">
-          +
+        <div onClick={() => context.setCount(context.count + 1)} className="bg-gray-400 w-6 h-6 absolute bottom-6 left-5 flex justify-center items-center rounded-lg cursor-pointer">
+          <PlusIcon className="size-3 border-[1px] border-black rounded-full"></PlusIcon>
+        </div>
+        <div onClick={() => {
+          handleProductoClick(data)
+          context.setOpen(context.open = true)
+        }} className="bg-gray-400 w-6 h-6 absolute bottom-6 left-14 flex justify-center items-center rounded-lg cursor-pointer">
+          <EyeIcon className="size-3 border-[1px] border-black rounded-full bg-black text-gray-400"></EyeIcon>
         </div>
       </figure>
-      <p className="flex justify-between">
-        <span className="text-sm font-light">{title}</span>
-        <span className="text-lg font-medium">${price}</span>
-      </p>
     </div>
   );
 }
 
 export default CardNormal;
-
-
-/* const CardNormal = (data) => {
-  return (
-    <div className='bg-white cursor-pointer w-56 h-60 rounded-lg'>
-      <figure className='relative mb-2 w-full h-4/5'>
-        <span className='absolute bottom-0 left-0 bg-white/60 rounded-lg text-black text-xs m-2 px-3 py-0.5'>{data.data.category.name}</span>
-        <img className='w-full h-full object-cover rounded-lg' src={data.data.images[0]} alt={data.data.title} />
-        <div className='absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 p-1'>
-          +
-        </div>
-      </figure>
-      <p className='flex justify-between'>
-        <span className='text-sm font-light'>{data.data.title}</span>
-        <span className='text-lg font-medium'>${data.data.price}</span>
-      </p>
-    </div>
-  )
-}
-
-export default CardNormal */
