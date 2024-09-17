@@ -36,8 +36,22 @@ function CardNormal({ data }) {
   const handleProductoClick = () => {
     let producto = data
     context.setProductoSeleccionado(producto)
-    // Esto hace que cada vez que se de cilck en algun producto guarde la informacion del obejto en la variable "producto" del contexto, asi puedo mostrarlo en el modal.
+    // Esto hace que cada vez que se de click en algun producto guarde la informacion del obejto en la variable "producto" del contexto, asi puedo mostrarlo en el modal.
   };
+
+  const addProductsToCart = (productData) => {
+    const productExists = context.cartProducts.some(object => object.id === productData.id); // dará true si el producto ya se encuentra en el carrito
+
+		if (productExists) {
+			// valida la existencia
+			const productCart = context.cartProducts.find(object => object.id === productData.id); // busca el producto
+			productCart.quantity += 1; // aumenta la cantidad en 1
+		} else {
+			productData.quantity = 1; // si el producto no está, le agrega la propiedad quantity con valor uno, y luego setea el carrito agregando ese producto
+			context.setCartProducts([...context.cartProducts, productData]);
+		}
+		context.setCount(context.count + 1);
+  }
 
   return (
     <div
@@ -61,7 +75,7 @@ function CardNormal({ data }) {
             ? data.category.charAt(0).toUpperCase() + data.category.slice(1)
             : "Waiting..."}
         </span>
-        <div onClick={() => context.setCount(context.count + 1)} className="bg-gray-400 w-6 h-6 absolute bottom-6 left-5 flex justify-center items-center rounded-lg cursor-pointer">
+        <div onClick={() => addProductsToCart(data)} className="bg-gray-400 w-6 h-6 absolute bottom-6 left-5 flex justify-center items-center rounded-lg cursor-pointer">
           <PlusIcon className="size-3 border-[1px] border-black rounded-full"></PlusIcon>
         </div>
         <div onClick={() => {

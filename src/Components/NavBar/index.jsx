@@ -10,7 +10,7 @@ function NavBar() {
   const accountFlex = "flex"
   const context = useContext(ShoppingCartContext)
   return (
-    <nav className="bg-teal-700 flex justify-between items-center fixed z-10 top-0 w-full py-5 px-8 font-medium text-base font-quicksand">
+    <nav className="bg-teal-700 flex justify-between items-center absolute z-10 top-0 w-full py-5 px-8 font-medium text-base font-quicksand">
       <ul className="flex items-center gap-3">
         <li className="font-semibold text-2xl">
           <NavLink to="/">KVStore</NavLink>
