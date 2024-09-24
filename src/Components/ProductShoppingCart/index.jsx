@@ -1,9 +1,9 @@
-import { PlusIcon, MinusIcon } from '@heroicons/react/24/solid';
+import { PlusIcon, MinusIcon, TrashIcon } from '@heroicons/react/24/solid';
 import { useContext } from "react";
 import { ShoppingCartContext } from "../../Context";
 
 function ProductShoppingCart(props) {
-    const { id, title, imageUrl, price, quantity } = props;
+    const { id, title, imageUrl, price, quantity, handleDelete } = props;
     const { increaseQuantity, decreaseQuantity } = useContext(ShoppingCartContext);
 
     return (
@@ -16,16 +16,19 @@ function ProductShoppingCart(props) {
                     <h3 className="text-lg font-medium">{title}</h3>
                     <div className='flex items-center'>
                         <p className="text-gray-500 mx-2">Cantidad </p>
-                        <button 
-                            className="text-gray-500 hover:text-gray-700"
-                            onClick={() => decreaseQuantity(id)}
-                        >
-                            <MinusIcon className="size-4" />
+                        <button
+                            className="bg-red-200 rounded-md text-gray-500 hover:text-gray-700"
+                            onClick={() => {
+                                decreaseQuantity(id)
+                            }}
+                        ><MinusIcon className="size-4" />
                         </button>
                         <span className="mx-2">{quantity}</span>
-                        <button 
-                            className="text-gray-500 hover:text-gray-700"
-                            onClick={() => increaseQuantity(id)}
+                        <button
+                            className="bg-green-200 rounded-md text-gray-500 hover:text-gray-700"
+                            onClick={() => {
+                                increaseQuantity(id)
+                            }}
                         >
                             <PlusIcon className="size-4" />
                         </button>
@@ -33,8 +36,8 @@ function ProductShoppingCart(props) {
                 </div>
             </div>
             <div className="flex items-center">
-                <span className="mx-4">${price * quantity}</span>
-                <button className="text-red-500 hover:text-red-700">Eliminar</button>
+                <span className="mx-4">${parseFloat((price * quantity).toFixed(1))}</span>
+                <button onClick={() => handleDelete(id)} className="flex bg-red-500 rounded-md p-1 text-sm text-white hover:bg-red-600">Delete <TrashIcon className="size-5 ml-1"/></button>
             </div>
         </div>
     );

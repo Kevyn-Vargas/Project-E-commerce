@@ -42,6 +42,8 @@ function CardNormal({ data }) {
   const addProductsToCart = (productData) => {
     const productExists = context.cartProducts.some(object => object.id === productData.id); // dará true si el producto ya se encuentra en el carrito
 
+    context.setShowNotification(true);
+
 		if (productExists) {
 			// valida la existencia
 			const productCart = context.cartProducts.find(object => object.id === productData.id); // busca el producto
@@ -50,7 +52,6 @@ function CardNormal({ data }) {
 			productData.quantity = 1; // si el producto no está, le agrega la propiedad quantity con valor uno, y luego setea el carrito agregando ese producto
 			context.setCartProducts([...context.cartProducts, productData]);
 		}
-		context.setCount(context.count + 1);
   }
 
   return (

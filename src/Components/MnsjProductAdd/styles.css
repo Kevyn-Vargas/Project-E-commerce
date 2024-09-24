@@ -1,0 +1,36 @@
+@keyframes slideUp {
+  0% {
+    transform: translate(-50%, 50%); /* Comienza desde abajo */
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, 0); /* Se coloca en su posición final */
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%); /* Desaparece hacia arriba */
+    opacity: 0;
+  }
+}
+
+.notification {
+  background-color: #38a169;
+  color: white;
+  padding: 16px;
+  position: fixed;
+  top: 30%; /* Ajusta la distancia desde el tope de la pantalla */
+  left: 50%;
+  transform: translate(-50%, 50%); /* Inicialmente fuera de la vista */
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  opacity: 0;
+  animation: slideUp 0.5s ease forwards, slideDown 0.5s ease forwards 0.7s; /* La primera animación es para que suba, la segunda después de Xsegundos para que desaparezca */
+}

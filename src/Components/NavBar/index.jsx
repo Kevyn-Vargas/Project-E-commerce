@@ -6,13 +6,17 @@ import { UserIcon } from '@heroicons/react/24/solid'
 import { HeartIcon } from '@heroicons/react/24/solid'
 
 function NavBar() {
-  const activeStyle = "flex underline underline-offset-8";
+  const activeStyle = "flex text-white underline underline-offset-8";
   const accountFlex = "flex"
   const context = useContext(ShoppingCartContext)
+  let container = context.cartProducts.reduce((acumulador, producto) => {
+    return acumulador + producto.quantity;
+}, 0);
   return (
-    <nav className="bg-teal-700 flex justify-between items-center absolute z-10 top-0 w-full py-5 px-8 font-medium text-base font-quicksand">
+    <nav className="bg-black text-slate-300 flex justify-between items-center fixed z-1000 top-0 w-full py-5 px-8 font-medium text-base font-quicksand">
+      {/*bg-teal-700*/}
       <ul className="flex items-center gap-3">
-        <li className="font-semibold text-2xl">
+        <li className="text-white font-semibold text-2xl">
           <NavLink to="/">KVStore</NavLink>
         </li> |
         <li>
@@ -90,7 +94,7 @@ function NavBar() {
             className="flex"
             to="/shopping-cart"
           >
-            <ShoppingCartIcon className="size-7 text-black"></ShoppingCartIcon><span className="px-1">{context.count}</span>
+            <ShoppingCartIcon className="size-7 text-slate-300"></ShoppingCartIcon><span className="px-1">{container}</span>
           </NavLink>
         </li>
       </ul>

@@ -12,14 +12,6 @@ function ProductDetails() {
     setOpen(!open)
   }
 
-  /*   window.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape') {
-          if (open) {
-              handleClick();
-          }
-      }
-  }) */
-
   const productDefault = {
     title: "Producto Default",
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png",
@@ -27,6 +19,22 @@ function ProductDetails() {
     description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias exercitationem quidem eaque doloremque earum esse quos soluta ipsum, quod eum, quis laborum nobis ipsam sunt corrupti! Doloremque dolor similique consequuntur?",
     price: 22.33
   }
+
+  const addProductsToCart = () => {
+    const productExists = context.cartProducts.some(object => object.id === context.productoSeleccionado.id); // dará true si el producto ya se encuentra en el carrito
+
+    context.setShowNotification(true);
+
+		if (productExists) {
+			// valida la existencia
+			const productCart = context.cartProducts.find(object => object.id === context.productoSeleccionado.id); // busca el producto
+			productCart.quantity += 1; // aumenta la cantidad en 1
+		} else {
+			context.productoSeleccionado.quantity = 1; // si el producto no está, le agrega la propiedad quantity con valor uno, y luego setea el carrito agregando ese producto
+			context.setCartProducts([...context.cartProducts, context.productoSeleccionado]);
+		}
+  }
+
 
   return (
     <div
@@ -44,24 +52,24 @@ function ProductDetails() {
                 className="w-3/5 h-full object-contain rounden-lg mr-4"
               />
               <div className="bg-gray-200 p-4 rounded-lg w-1/2 h-full flex flex-col">
-              <XMarkIcon onClick={handleClick} className="fixed top-[115px] right-[175px] size-6 p-1 text-white bg-red-600 rounded-lg cursor-pointer"></XMarkIcon>
+                <XMarkIcon onClick={handleClick} className="fixed top-[115px] right-[175px] size-6 p-1 text-white bg-red-600 rounded-lg cursor-pointer"></XMarkIcon>
                 <h2 className="text-xl font-bold">{context.productoSeleccionado?.title.charAt(0).toUpperCase() + context.productoSeleccionado?.title.slice(1) || productDefault.title}</h2>
-                <p className="text-teal-700 font-semibold text-sm">{context.productoSeleccionado?.category.charAt(0).toUpperCase() + context.productoSeleccionado?.category.slice(1) || productDefault.category}</p>
-                <p className="text-gray-600 my-4 h-auto overflow-y-auto scrollbar-track-transparent scrollbar-thin scrollbar-thumb-teal-700">{context.productoSeleccionado?.description.charAt(0).toUpperCase() + context.productoSeleccionado?.description.slice(1) || productDefault.description}</p>
+                <p className="text-slate-600 font-semibold text-sm">{context.productoSeleccionado?.category.charAt(0).toUpperCase() + context.productoSeleccionado?.category.slice(1) || productDefault.category}</p>
+                <p className="text-gray-600 my-4 h-auto overflow-y-auto scrollbar-track-transparent scrollbar-thin scrollbar-thumb-slate-600">{context.productoSeleccionado?.description.charAt(0).toUpperCase() + context.productoSeleccionado?.description.slice(1) || productDefault.description}</p>
                 <div className="flex justify-around mt-7">
                   <p className="text-gray-800 font-bold text-2xl">Price: ${context.productoSeleccionado?.price || productDefault.price}</p>
-                  <button className="bg-orange-900 text-white w-3/6 hover:bg-orange-700 font-bold py-2 px-4 rounded self-center">
+                  <button
+                    onClick={addProductsToCart}
+                    className="bg-green-600 hover:bg-green-700 text-white w-3/6 font-bold py-2 px-4 rounded self-center">
                     Add to Cart
                   </button>
                 </div>
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>
   );
 }
-
 export default ProductDetails;

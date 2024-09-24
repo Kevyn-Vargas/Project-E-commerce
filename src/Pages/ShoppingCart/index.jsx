@@ -1,4 +1,5 @@
-import { useContext } from "react";
+import { useEffect, useContext } from "react";
+import { Link } from 'react-router-dom';
 import { ShoppingCartContext } from "../../Context";
 import ProductShoppingCart from "../../Components/ProductShoppingCart";
 
@@ -9,9 +10,24 @@ function ShoppingCart() {
     return accumulator + product.price * product.quantity;
   }, 0);
 
+  const handleDelete = (id) => {
+    const filteredProducts = context.cartProducts.filter(product => product.id != id)
+    context.setCartProducts(filteredProducts)
+  }
+
+  useEffect(() => {
+    // Cambiar el fondo del body a gris cuando se monta el componente
+    document.body.style.backgroundColor = "#E5E7EB";
+
+    // Restaurar el fondo del body cuando se desmonta el componente
+    return () => {
+      document.body.style.backgroundColor = ''; // Esto lo restaura al valor predeterminado
+    };
+  }, []); // El array vacío asegura que se ejecute solo al montar y desmontar
+
   return (
-    <div className="pt-16 flex flex-col bg-gray-200">
-      <div className="flex justify-items-center justify-evenly py-16 bg-gray-200 h-max ">
+    <div className="pt-16 flex flex-col">
+      <div className="flex justify-items-center justify-evenly py-16">
         <div className="w-7/12 flex flex-col justify-evenly">
           {
             context.cartProducts.map(product => (
@@ -22,6 +38,7 @@ function ShoppingCart() {
                 imageUrl={product.image}
                 price={product.price}
                 quantity={product.quantity}
+                handleDelete={handleDelete}
               />
             ))
           }
@@ -30,7 +47,7 @@ function ShoppingCart() {
           <h2 className="text-lg font-bold">Resumen de compra</h2>
           <div className="flex justify-between">
             <span>Total</span>
-            <span>${totalQuantity}</span>
+            <span>${parseFloat(totalQuantity.toFixed(1))}</span>
           </div>
           <div className="flex justify-between">
             <span>Envío</span>
@@ -41,10 +58,20 @@ function ShoppingCart() {
             <span className="font-bold">Total</span>
             <span className="font-bold">$Precio Final</span>
           </div>
-          <input type="text" placeholder="Ingresar código de cupón" className="mt-2" />
-          <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4">
-            Continuar compra
-          </button>
+          <input type="text" placeholder="Enter code of cupon" className="mt-2" />
+          {totalQuantity > 0 ? (
+        <>
+          <Link to="/payment">
+            <button className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4">
+              Buy Now
+            </button>
+          </Link>
+        </>
+      ) : (
+        <div className="notification text-red-600 font-bold">
+          El carrito está vacío. Es necesario agregar un producto.
+        </div>
+      )}
         </div>
       </div>
     </div>
