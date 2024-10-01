@@ -7,6 +7,7 @@ export const ShoppingCartProvider = ({ children }) => {
   const [productoSeleccionado, setProductoSeleccionado] = useState(null);
   const [cartProducts, setCartProducts] = useState([]);
   const [showNotification, setShowNotification] = useState(false);
+  const [order, setOrder] = useState([]);
 
   const increaseQuantity = (id) => {
     const updatedCart = cartProducts.map(product => {
@@ -41,6 +42,8 @@ export const ShoppingCartProvider = ({ children }) => {
         decreaseQuantity,
         showNotification,
         setShowNotification,
+        order,
+        setOrder,
       }}
     >
       {children}

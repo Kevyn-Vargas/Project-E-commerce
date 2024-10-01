@@ -4,14 +4,13 @@ import "./App.css";
 import { ShoppingCartProvider } from "../../Context";
 import Home from "../Home";
 import Account from "../Account";
-import Order from "../Order";
+import Orders from "../Orders";
+import OrderLast from "../Order-last";
 import ShoppingCart from "../ShoppingCart";
 import NotFound from "../NotFound";
 import SingIn from "../SingIn";
 import Contact from "../Contact";
-import ILiked from "../ILiked";
 import NewProducs_OnSale from "../NewProductsOnSale";
-import AllCategories from "../AllCategories";
 import NavBar from "../../Components/NavBar";
 import Payment from "../Payment";
 
@@ -19,13 +18,12 @@ const AppRoutes = () => {
   let routes = useRoutes([
     { path: "/", element: <Home /> },
     { path: "/account", element: <Account /> },
-    { path: "/order", element: <Order /> },
+    { path: "/orders", element: <Orders /> },
+    { path: "/orders/last", element: <OrderLast /> },
     { path: "/shopping-cart", element: <ShoppingCart /> },
     { path: "/sing-in", element: <SingIn /> },
     { path: "/contact", element: <Contact /> },
-    { path: "/like", element: <ILiked /> },
     { path: "/new-&-onsale", element: <NewProducs_OnSale /> },
-    { path: "/all-categories", element: <AllCategories /> },
     { path: "/payment", element: <Payment/>},
     { path: "/*", element: <NotFound /> },
   ]);

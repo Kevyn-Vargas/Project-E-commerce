@@ -1,19 +1,20 @@
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import { Link } from 'react-router-dom';
 import { ShoppingCartContext } from "../../Context";
 import ProductShoppingCart from "../../Components/ProductShoppingCart";
 
 function ShoppingCart() {
   const context = useContext(ShoppingCartContext);
+  const [showNotification, setShowNotification] = useState(false);
 
   const totalQuantity = context.cartProducts.reduce((accumulator, product) => {
     return accumulator + product.price * product.quantity;
   }, 0);
 
   const handleDelete = (id) => {
-    const filteredProducts = context.cartProducts.filter(product => product.id != id)
-    context.setCartProducts(filteredProducts)
-  }
+    const filteredProducts = context.cartProducts.filter(product => product.id !== id);
+    context.setCartProducts(filteredProducts);
+  };
 
   useEffect(() => {
     // Cambiar el fondo del body a gris cuando se monta el componente
@@ -23,7 +24,18 @@ function ShoppingCart() {
     return () => {
       document.body.style.backgroundColor = ''; // Esto lo restaura al valor predeterminado
     };
-  }, []); // El array vacío asegura que se ejecute solo al montar y desmontar
+  }, []);
+
+  // Mostrar notificación por 10 segundos cuando el carrito está vacío
+  useEffect(() => {
+    if (totalQuantity === 0) {
+      setShowNotification(true);
+      const timer = setTimeout(() => {
+        setShowNotification(false); // Ocultar notificación después de 10 segundos
+      }, 10000); // 10000ms = 10 segundos
+      return () => clearTimeout(timer); // Limpiar el temporizador al desmontar
+    }
+  }, [totalQuantity]);
 
   return (
     <div className="pt-16 flex flex-col">
@@ -60,18 +72,22 @@ function ShoppingCart() {
           </div>
           <input type="text" placeholder="Enter code of cupon" className="mt-2" />
           {totalQuantity > 0 ? (
-        <>
-          <Link to="/payment">
-            <button className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4">
-              Buy Now
-            </button>
-          </Link>
-        </>
-      ) : (
-        <div className="notification text-red-600 font-bold">
-          El carrito está vacío. Es necesario agregar un producto.
-        </div>
-      )}
+            <>
+              <Link to="/payment">
+                <button className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4">
+                  Buy Now
+                </button>
+              </Link>
+            </>
+          ) : (
+            <div>
+              {showNotification && (
+                <div className={`notification transition-opacity duration-700 ease-in-out bg-red-500 text-white p-4 rounded mt-4 ${showNotification ? 'opacity-100' : 'opacity-0'}`}>
+                  El carrito está vacío. Es necesario agregar un producto.
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>

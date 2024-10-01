@@ -1,6 +1,16 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ShoppingCartContext } from '../../Context';
 
 function Payment() {
+
+  const navigate = useNavigate();
+  const context = useContext(ShoppingCartContext);
+
+  const totalQuantity = context.cartProducts.reduce((accumulator, product) => {
+    return accumulator + product.price * product.quantity;
+  }, 0);
+
   const [formData, setFormData] = useState({
     fullName: '',
     address: '',
@@ -27,6 +37,35 @@ function Payment() {
     });
   };
 
+  const handleAutoFill = () => {
+    const exampleData = {
+      fullName: 'John Doe',
+      address: '123 Main St',
+      city: 'New York',
+      postalCode: '10001',
+      country: 'USA',
+      phoneNumber: '555-1234',
+      email: 'johndoe@example.com',
+    };
+    
+    setFormData(exampleData);
+  };
+
+  const handleCheckout = () => {
+    const orderToAdd = {
+      date: "11.07.24",
+      products: context.cartProducts,
+      totalProducts: context.cartProducts.length,
+      totalPrice: totalQuantity,
+    };
+
+    context.setOrder([...context.order, orderToAdd]);
+    context.setCartProducts([]);
+
+    // Redirigir a /myOrder
+    navigate('/orders/last'); // Redirigir a la página después de ejecutar la función
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -41,9 +80,10 @@ function Payment() {
       formData.email
     ) {
       setFormSubmitted(true); // Simular la compra realizada
+      handleCheckout();
       setTimeout(() => {
         setFormSubmitted(false); // Ocultar la notificación después de 3 segundos
-      }, 2500);
+      }, 5000);
     } else {
       alert('Por favor, completa todos los campos');
     }
@@ -51,6 +91,17 @@ function Payment() {
 
   return (
     <div className="max-w-4xl mx-auto mt-28">
+      {/* Botón para autocompletar el formulario */}
+      <div className="text-right mb-4">
+        <button 
+          type="button" 
+          onClick={handleAutoFill}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        >
+          Autocompletar
+        </button>
+      </div>
+
       {/* Formulario de pago */}
       <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <h2 className="text-2xl font-bold mb-4 text-center">Información de Envío</h2>

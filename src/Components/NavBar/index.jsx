@@ -3,7 +3,6 @@ import { useContext } from "react";
 import { ShoppingCartContext } from "../../Context";
 import { ShoppingCartIcon } from '@heroicons/react/24/solid'
 import { UserIcon } from '@heroicons/react/24/solid'
-import { HeartIcon } from '@heroicons/react/24/solid'
 
 function NavBar() {
   const activeStyle = "flex text-white underline underline-offset-8";
@@ -59,14 +58,6 @@ function NavBar() {
             Toys
           </NavLink>
         </li>
-        <li>
-          <NavLink
-            to="/all-categories"
-            className={({ isActive }) => (isActive ? activeStyle : undefined)}
-          >
-            All Categories
-          </NavLink>
-        </li>
       </ul>
 
       <ul className="flex items-center gap-3">
@@ -83,10 +74,8 @@ function NavBar() {
         <li>
           <NavLink
             className={({ isActive }) => (isActive ? activeStyle : undefined)}
-            to="/like"
-          ><div>
-            <HeartIcon className="size-6"></HeartIcon>
-          </div>
+            to="/orders"
+          >Orders
           </NavLink>
         </li>|
         <li>
