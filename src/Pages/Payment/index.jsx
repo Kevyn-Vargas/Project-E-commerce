@@ -52,8 +52,11 @@ function Payment() {
   };
 
   const handleCheckout = () => {
+
+    const date = new Date();
+
     const orderToAdd = {
-      date: "11.07.24",
+      date: date.toLocaleDateString(),
       products: context.cartProducts,
       totalProducts: context.cartProducts.length,
       totalPrice: totalQuantity,
@@ -63,7 +66,7 @@ function Payment() {
     context.setCartProducts([]);
 
     // Redirigir a /myOrder
-    navigate('/orders/last'); // Redirigir a la página después de ejecutar la función
+    navigate(`/orders/last`); // Redirigir a la página después de ejecutar la función
   };
 
   const handleSubmit = (e) => {

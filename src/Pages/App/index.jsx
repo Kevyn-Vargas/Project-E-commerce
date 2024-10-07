@@ -20,6 +20,7 @@ const AppRoutes = () => {
     { path: "/account", element: <Account /> },
     { path: "/orders", element: <Orders /> },
     { path: "/orders/last", element: <OrderLast /> },
+    { path: "/orders/:id", element: <OrderLast /> },
     { path: "/shopping-cart", element: <ShoppingCart /> },
     { path: "/sing-in", element: <SingIn /> },
     { path: "/contact", element: <Contact /> },
