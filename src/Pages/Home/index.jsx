@@ -25,6 +25,7 @@ function Home() {
           focus:outline-none focus:border-black pl-1 my-12 py-2 ${index ? 'bg-gray-300 cursor-not-allowed' : ''}`}
         type="text"
         placeholder="Search..."
+        value={context.searched || ''}
         onChange={(event) => context.setSearched(event.target.value)}
         disabled={!!index}
       />

@@ -11,6 +11,11 @@ function NavBar() {
   let container = context.cartProducts.reduce((acumulador, producto) => {
     return acumulador + producto.quantity;
 }, 0);
+
+  function resetSearched(){
+    context.setSearched('');
+  }
+
   return (
     <nav className="bg-black text-slate-300 flex justify-between items-center fixed z-1000 top-0 w-full py-5 px-8 font-medium text-base font-quicksand">
       {/*bg-teal-700*/}
@@ -21,6 +26,7 @@ function NavBar() {
         <li>
           <NavLink
             to="/"
+            onClick={resetSearched}
             className={({ isActive }) => (isActive ? activeStyle : undefined)}
           >
             Home
@@ -29,6 +35,7 @@ function NavBar() {
         <li>
           <NavLink
             to="/men's clothing"
+            onClick={resetSearched}
             className={({ isActive }) => (isActive ? activeStyle : undefined)}
           >
             Men's
@@ -38,6 +45,7 @@ function NavBar() {
           <NavLink
             className={({ isActive }) => (isActive ? activeStyle : undefined)}
             to="/women's clothing"
+            onClick={resetSearched}
           >
             Women's
           </NavLink>
@@ -46,6 +54,7 @@ function NavBar() {
           <NavLink
             className={({ isActive }) => (isActive ? activeStyle : undefined)}
             to="/electronics"
+            onClick={resetSearched}
           >
             Electronics
           </NavLink>
@@ -54,6 +63,7 @@ function NavBar() {
           <NavLink
             className={({ isActive }) => (isActive ? activeStyle : undefined)}
             to="/jewelery"
+            onClick={resetSearched}
           >
             Jewelery
           </NavLink>
@@ -66,6 +76,7 @@ function NavBar() {
           <NavLink
             className={({ isActive }) => (isActive ? activeStyle : accountFlex)}
             to="/account"
+            onClick={resetSearched}
           >
             <UserIcon className="size-6"></UserIcon>
             <span className="px-1">Account</span>
@@ -75,6 +86,7 @@ function NavBar() {
           <NavLink
             className={({ isActive }) => (isActive ? activeStyle : undefined)}
             to="/orders"
+            onClick={resetSearched}
           >Orders
           </NavLink>
         </li>|
@@ -82,6 +94,7 @@ function NavBar() {
           <NavLink
             className="flex"
             to="/shopping-cart"
+            onClick={resetSearched}
           >
             <ShoppingCartIcon className="size-7 text-slate-300"></ShoppingCartIcon><span className="px-1">{container}</span>
           </NavLink>
