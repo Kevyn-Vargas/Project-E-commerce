@@ -28,18 +28,18 @@ function NavBar() {
         </li>
         <li>
           <NavLink
-            to="/clothes"
+            to="/men's clothing"
             className={({ isActive }) => (isActive ? activeStyle : undefined)}
           >
-            Clothes
+            Men's
           </NavLink>
         </li>
         <li>
           <NavLink
             className={({ isActive }) => (isActive ? activeStyle : undefined)}
-            to="/smartphones"
+            to="/women's clothing"
           >
-            Smartphones
+            Women's
           </NavLink>
         </li>
         <li>
@@ -53,9 +53,9 @@ function NavBar() {
         <li>
           <NavLink
             className={({ isActive }) => (isActive ? activeStyle : undefined)}
-            to="/toys"
+            to="/jewelery"
           >
-            Toys
+            Jewelery
           </NavLink>
         </li>
       </ul>

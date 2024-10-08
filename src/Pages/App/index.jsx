@@ -17,6 +17,7 @@ import Payment from "../Payment";
 const AppRoutes = () => {
   let routes = useRoutes([
     { path: "/", element: <Home /> },
+    { path: "/:category", element: <Home /> },
     { path: "/account", element: <Account /> },
     { path: "/orders", element: <Orders /> },
     { path: "/orders/last", element: <OrderLast /> },
