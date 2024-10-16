@@ -17,9 +17,7 @@ export const ShoppingCartProvider = ({ children }) => {
   const [filteredItems, setFilteredItems] = useState(null)
   const [open, setOpen] = useState(false);
   const [productoSeleccionado, setProductoSeleccionado] = useState(null);
-  const [cartProducts, setCartProducts] = useState([]);
   const [showNotification, setShowNotification] = useState(false);
-  const [order, setOrder] = useState([]);
 
   const filteredItemsBySearched = (items, searched) => {
     return items?.filter(item => item.title.toLowerCase().includes(searched.toLowerCase()) ||
@@ -49,6 +47,41 @@ export const ShoppingCartProvider = ({ children }) => {
     });
     setCartProducts(updatedCart);
   };
+
+  /* Aqui empieza el Local Storage!!!
+
+  This code revisa si en el local storage hay algun tipo de datos (ya sea en el carrito, user, u ordenes) y lo pone en el contexto actual como datos. */
+  // Inicializamos el carrito y las órdenes directamente desde el localStorage
+
+  //Carrito de Compras
+   const [cartProducts, setCartProducts] = useState(() => {
+    const storedCartProducts = localStorage.getItem("cartProducts");
+    return storedCartProducts ? JSON.parse(storedCartProducts) : [];
+  });
+
+  //Orders(Pedidos)
+  const [order, setOrder] = useState(() => {
+    const storedOrders = localStorage.getItem("order");
+    return storedOrders ? JSON.parse(storedOrders) : [];
+  });
+
+  //Aqui posiblemente vaya el de User, es practicamente replicar los anteriores.
+
+
+ /*  De aqui en adelante se guarda en Local Storage al actualizar los datos (with con useEffect) */
+
+  //Carrito de compras
+  useEffect(() => {
+    localStorage.setItem("cartProducts", JSON.stringify(cartProducts));
+  }, [cartProducts]);
+
+
+  //Orders (Pedidos)
+  useEffect(() => {
+    localStorage.setItem("order", JSON.stringify(order));
+  }, [order]);
+
+  //Aqui posiblemente vaya el de User, es practicamente replicar los anteriores.
 
   return (
     <ShoppingCartContext.Provider

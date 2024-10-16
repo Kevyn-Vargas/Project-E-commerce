@@ -15,12 +15,11 @@ function OrderLast() {
 
   return (
     <Layout>
-      <h1 className="mt-2">Last Order</h1>
-      <div className="flex justify-between">
-        <Link to="/orders">
+      <div className="flex justify-between mt-6">
+        <Link to="/orders" className="flex">
           <ChevronLeftIcon className="size-6 p-1 text-white bg-red-600 rounded-lg cursor-pointer" />
+          <h1 className="ml-4">My Orders</h1>
         </Link>
-        <h1>My Orders</h1>
       </div>
       <div className="w-7/12 flex flex-col justify-evenly">
         {
