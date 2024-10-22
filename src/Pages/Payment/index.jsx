@@ -47,7 +47,7 @@ function Payment() {
       phoneNumber: '555-1234',
       email: 'johndoe@example.com',
     };
-    
+
     setFormData(exampleData);
   };
 
@@ -96,12 +96,12 @@ function Payment() {
     <div className="max-w-4xl mx-auto mt-28">
       {/* Botón para autocompletar el formulario */}
       <div className="text-right mb-4">
-        <button 
-          type="button" 
+        <button
+          type="button"
           onClick={handleAutoFill}
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         >
-          Autocompletar
+          Automatically add your card data
         </button>
       </div>
 
@@ -111,7 +111,7 @@ function Payment() {
         <div className="grid grid-cols-2 gap-6">
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="fullName">
-              Nombre Completo
+              Full Name
             </label>
             <input
               type="text"
@@ -119,13 +119,13 @@ function Payment() {
               value={formData.fullName}
               onChange={handleInputChange}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              placeholder="Nombre Completo"
+              placeholder="Full Name"
               required
             />
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="address">
-              Dirección
+              Adress
             </label>
             <input
               type="text"
@@ -133,13 +133,13 @@ function Payment() {
               value={formData.address}
               onChange={handleInputChange}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              placeholder="Dirección"
+              placeholder="Adress"
               required
             />
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="city">
-              Ciudad
+              City
             </label>
             <input
               type="text"
@@ -147,13 +147,13 @@ function Payment() {
               value={formData.city}
               onChange={handleInputChange}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              placeholder="Ciudad"
+              placeholder="City"
               required
             />
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="postalCode">
-              Código Postal
+              Zip Code
             </label>
             <input
               type="text"
@@ -161,13 +161,13 @@ function Payment() {
               value={formData.postalCode}
               onChange={handleInputChange}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              placeholder="Código Postal"
+              placeholder="Zip Code"
               required
             />
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="country">
-              País
+              Country
             </label>
             <input
               type="text"
@@ -175,13 +175,13 @@ function Payment() {
               value={formData.country}
               onChange={handleInputChange}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              placeholder="País"
+              placeholder="Country"
               required
             />
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="phoneNumber">
-              Teléfono
+              Phone
             </label>
             <input
               type="tel"
@@ -189,13 +189,13 @@ function Payment() {
               value={formData.phoneNumber}
               onChange={handleInputChange}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              placeholder="Teléfono"
+              placeholder="Phone"
               required
             />
           </div>
           <div className="mb-4 col-span-2">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-              Correo Electrónico
+              Email
             </label>
             <input
               type="email"
@@ -203,7 +203,7 @@ function Payment() {
               value={formData.email}
               onChange={handleInputChange}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              placeholder="Correo Electrónico"
+              placeholder="Email"
               required
             />
           </div>
@@ -214,7 +214,7 @@ function Payment() {
         <div className="grid grid-cols-2 gap-6">
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="cardNumber">
-              Número de Tarjeta
+              Card Number
             </label>
             <input
               type="text"
@@ -226,7 +226,7 @@ function Payment() {
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="expiryDate">
-              Fecha de Expiración
+              Expiration Date
             </label>
             <input
               type="text"
@@ -254,14 +254,14 @@ function Payment() {
           type="submit"
           className="w-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         >
-          Confirmar Compra
+          Confirm Purchase
         </button>
       </form>
 
       {/* Mensaje de confirmación */}
       {formSubmitted && (
         <div className="notification">
-          ¡Compra realizada con éxito!
+          Successful purchase!
         </div>
       )}
     </div>

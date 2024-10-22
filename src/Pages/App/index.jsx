@@ -10,7 +10,6 @@ import ShoppingCart from "../ShoppingCart";
 import NotFound from "../NotFound";
 import SingIn from "../SingIn";
 import Contact from "../Contact";
-import NewProducs_OnSale from "../NewProductsOnSale";
 import NavBar from "../../Components/NavBar";
 import Payment from "../Payment";
 
@@ -25,7 +24,6 @@ const AppRoutes = () => {
     { path: "/shopping-cart", element: <ShoppingCart /> },
     { path: "/sing-in", element: <SingIn /> },
     { path: "/contact", element: <Contact /> },
-    { path: "/new-&-onsale", element: <NewProducs_OnSale /> },
     { path: "/payment", element: <Payment/>},
     { path: "/*", element: <NotFound /> },
   ]);

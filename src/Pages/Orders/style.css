@@ -1,0 +1,43 @@
+.virtual-card,
+.physical-card,
+.tokenized-card {
+  margin: 0 50px;
+}
+
+.plus {
+  animation: plus 2s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+}
+
+.plus-one {
+  animation: plus 2.5s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+}
+
+.plus-two {
+  animation: plus 3s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+}
+
+.plus-three {
+  animation: plus 3.5s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+}
+
+.plus-four {
+  animation: plus 4s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+}
+
+.plus-five {
+  animation: plus 4.5s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+}
+
+@keyframes plus {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
