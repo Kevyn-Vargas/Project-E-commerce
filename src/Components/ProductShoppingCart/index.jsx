@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { ShoppingCartContext } from "../../Context";
 
 function ProductShoppingCart(props) {
+    const context = useContext(ShoppingCartContext)
     const { id, title, imageUrl, price, quantity, handleDelete } = props;
     const { increaseQuantity, decreaseQuantity } = useContext(ShoppingCartContext);
 
@@ -50,7 +51,8 @@ function ProductShoppingCart(props) {
             {
                 handleDelete &&
                 <div className="flex items-center">
-                    <span className="mx-4">${parseFloat((price * quantity).toFixed(1))}</span>
+                    <span className="mx-4">${parseFloat((price * quantity * context.currencyValueSelected).toFixed(1))
+                        .toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 2 })}</span>
                     <button onClick={() => handleDelete(id)} className="flex bg-red-500 rounded-md p-1 text-sm text-white hover:bg-red-600">Delete <TrashIcon className="size-5 ml-1" /></button>
                 </div>
             }

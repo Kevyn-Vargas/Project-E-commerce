@@ -1,5 +1,7 @@
 import { BanknotesIcon, RectangleStackIcon, CalendarDaysIcon } from '@heroicons/react/24/solid'
+import { useContext } from 'react';
 import { Link } from "react-router-dom";
+import { ShoppingCartContext } from '../../Context';
 
 function generateUniqueId() {
     // Genera un ID con letras y números
@@ -7,10 +9,17 @@ function generateUniqueId() {
 }
 
 function CardOrders(props) {
+    const context = useContext(ShoppingCartContext)
+
     const { totalPrice, totalProducts, date, index } = props;
 
-    const number = totalPrice.toFixed(2)
-    const totalPriceRecorted = parseFloat(number)
+    const totalPriceBefore = parseFloat(totalPrice);
+    const totalPriceRecorted = totalPriceBefore.toFixed(2)
+    const totalPriceInCurrency = totalPriceRecorted * context.currencyValueSelected;
+    const formattedTotalPrice = totalPriceInCurrency.toLocaleString("en-US", { 
+        minimumFractionDigits: 0, 
+        maximumFractionDigits: 2 
+      });
 
     const validedDate = new Date(date)
     const options = { day: 'numeric', month: 'short', year: 'numeric' }; // Formato: 07 Oct 2024
@@ -32,7 +41,7 @@ function CardOrders(props) {
                     <div className="flex justify-between items-center mb-4">
                         <div className="flex items-center">
                             <BanknotesIcon className='size-7 p-1' />
-                            <p>Total Price: ${totalPriceRecorted}</p>
+                            <p>Total Price: ${formattedTotalPrice}</p>
                         </div>
                         <p className='text-gray-500 font-light'>Payment by card</p>
                     </div>

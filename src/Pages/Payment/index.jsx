@@ -107,7 +107,7 @@ function Payment() {
 
       {/* Formulario de pago */}
       <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-        <h2 className="text-2xl font-bold mb-4 text-center">Información de Envío</h2>
+        <h2 className="text-2xl font-bold mb-4 text-center">Shipping Information</h2>
         <div className="grid grid-cols-2 gap-6">
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="fullName">

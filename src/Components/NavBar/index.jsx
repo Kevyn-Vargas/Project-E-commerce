@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { ShoppingCartContext } from "../../Context";
 import { ShoppingCartIcon } from '@heroicons/react/24/solid'
 import { UserIcon } from '@heroicons/react/24/solid'
+import SelectMoney from "../SelectMoney";
 
 function NavBar() {
   const activeStyle = "flex text-white underline underline-offset-8";
@@ -10,9 +11,9 @@ function NavBar() {
   const context = useContext(ShoppingCartContext)
   let container = context.cartProducts.reduce((acumulador, producto) => {
     return acumulador + producto.quantity;
-}, 0);
+  }, 0);
 
-  function resetSearched(){
+  function resetSearched() {
     context.setSearched('');
   }
 
@@ -71,7 +72,9 @@ function NavBar() {
       </ul>
 
       <ul className="flex items-center gap-3">
-        <li>USD</li>|
+        <li>
+          <SelectMoney />
+        </li>|
         <li>
           <NavLink
             className={({ isActive }) => (isActive ? activeStyle : accountFlex)}

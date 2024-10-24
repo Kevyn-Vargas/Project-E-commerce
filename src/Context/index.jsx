@@ -4,12 +4,21 @@ export const ShoppingCartContext = createContext();
 
 export const ShoppingCartProvider = ({ children }) => {
 
-  const url = "https://fakestoreapi.com/products";
+  const urlStore = "https://fakestoreapi.com/products";
+  const urlMoney = "https://v6.exchangerate-api.com/v6/3bfdd717e7ed311dec36b494/latest/USD";
 
   useEffect(() => {
-    fetch(url)
+    fetch(urlStore)
       .then((response) => response.json())
       .then((data) => setItems(data));
+  }, []);
+
+  useEffect(() => {
+    fetch(urlMoney)
+      .then((response) => response.json())
+      .then((data) => {
+        setExchangeRates(data.conversion_rates)
+      }) // Guardar todas las tasas de cambio);
   }, []);
 
   const [items, setItems] = useState(null);
@@ -18,10 +27,13 @@ export const ShoppingCartProvider = ({ children }) => {
   const [open, setOpen] = useState(false);
   const [productoSeleccionado, setProductoSeleccionado] = useState(null);
   const [showNotification, setShowNotification] = useState(false);
+  const [selectedOptionMoney, setSelectedOptionMoney] = useState('USD');
+  const [currencyValueSelected, setCurrencyValueSelected] = useState(1);
+  const [exchangesRates, setExchangeRates] = useState(null);
 
   const filteredItemsBySearched = (items, searched) => {
     return items?.filter(item => item.title.toLowerCase().includes(searched.toLowerCase()) ||
-    item.category.toLowerCase().includes(searched.toLowerCase()))
+      item.category.toLowerCase().includes(searched.toLowerCase()))
   }
 
   useEffect(() => {
@@ -54,7 +66,7 @@ export const ShoppingCartProvider = ({ children }) => {
   // Inicializamos el carrito y las órdenes directamente desde el localStorage
 
   //Carrito de Compras
-   const [cartProducts, setCartProducts] = useState(() => {
+  const [cartProducts, setCartProducts] = useState(() => {
     const storedCartProducts = localStorage.getItem("cartProducts");
     return storedCartProducts ? JSON.parse(storedCartProducts) : [];
   });
@@ -68,7 +80,7 @@ export const ShoppingCartProvider = ({ children }) => {
   //Aqui posiblemente vaya el de User, es practicamente replicar los anteriores.
 
 
- /*  De aqui en adelante se guarda en Local Storage al actualizar los datos (with con useEffect) */
+  /*  De aqui en adelante se guarda en Local Storage al actualizar los datos (with con useEffect) */
 
   //Carrito de compras
   useEffect(() => {
@@ -82,6 +94,30 @@ export const ShoppingCartProvider = ({ children }) => {
   }, [order]);
 
   //Aqui posiblemente vaya el de User, es practicamente replicar los anteriores.
+
+
+
+  //Hook que se encarga de hacer el cambio en los precios mediante la api y la opcion seleccionada
+  useEffect(() => {
+    switch (selectedOptionMoney) {
+      case "USD":
+        setCurrencyValueSelected(1)
+        break;
+      case "EUR":
+        setCurrencyValueSelected(exchangesRates.EUR)
+        break;
+      case "COP":
+        setCurrencyValueSelected(exchangesRates.COP)
+        break;
+      case "MXN":
+        setCurrencyValueSelected(exchangesRates.MXN)
+        break;
+      default:
+        setCurrencyValueSelected(1)
+        console.log("Valor Default en Moneda");
+        break;
+    }
+  }, [selectedOptionMoney])
 
   return (
     <ShoppingCartContext.Provider
@@ -104,6 +140,10 @@ export const ShoppingCartProvider = ({ children }) => {
         setSearched,
         filteredItems,
         setFilteredItems,
+        setSelectedOptionMoney,
+        selectedOptionMoney,
+        currencyValueSelected,
+        setCurrencyValueSelected,
       }}
     >
       {children}

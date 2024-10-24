@@ -67,7 +67,8 @@ function CardNormal({ data }) {
         />
         <p className="flex flex-col items-end absolute top-5 right-5">
           <span className="text-white text-xs">Price</span>
-          <span className="text-white text-lg font-medium">${price}</span>
+          <span className="text-white text-lg font-medium">${(price * context.currencyValueSelected).toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 2 })
+        }</span>
         </p>
 
         <span className="w-3/4 text-base font-medium text-white absolute bottom-20 left-5">{title}</span>

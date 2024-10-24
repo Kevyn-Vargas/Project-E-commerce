@@ -29,7 +29,7 @@ function OrderLast() {
               id={product.id}
               title={product.title}
               imageUrl={product.image}
-              price={product.price}
+              price={(product.price * context.currencyValueSelected).toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 2 })}
               quantity={product.quantity}
             />
           ))

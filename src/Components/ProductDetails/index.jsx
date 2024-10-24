@@ -25,16 +25,24 @@ function ProductDetails() {
 
     context.setShowNotification(true);
 
-		if (productExists) {
-			// valida la existencia
-			const productCart = context.cartProducts.find(object => object.id === context.productoSeleccionado.id); // busca el producto
-			productCart.quantity += 1; // aumenta la cantidad en 1
-		} else {
-			context.productoSeleccionado.quantity = 1; // si el producto no está, le agrega la propiedad quantity con valor uno, y luego setea el carrito agregando ese producto
-			context.setCartProducts([...context.cartProducts, context.productoSeleccionado]);
-		}
+    if (productExists) {
+      // valida la existencia
+      const productCart = context.cartProducts.find(object => object.id === context.productoSeleccionado.id); // busca el producto
+      productCart.quantity += 1; // aumenta la cantidad en 1
+    } else {
+      context.productoSeleccionado.quantity = 1; // si el producto no está, le agrega la propiedad quantity con valor uno, y luego setea el carrito agregando ese producto
+      context.setCartProducts([...context.cartProducts, context.productoSeleccionado]);
+    }
   }
 
+
+  const formattedPrice = (context.productoSeleccionado?.price ?? 0) * (context.currencyValueSelected ?? 1);
+
+  // Formatear el resultado con toLocaleString
+  const finalPrice = formattedPrice.toLocaleString("en-US", {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 2
+  });
 
   return (
     <div
@@ -57,7 +65,7 @@ function ProductDetails() {
                 <p className="text-slate-600 font-semibold text-sm">{context.productoSeleccionado?.category.charAt(0).toUpperCase() + context.productoSeleccionado?.category.slice(1) || productDefault.category}</p>
                 <p className="text-gray-600 my-4 h-auto overflow-y-auto scrollbar-track-transparent scrollbar-thin scrollbar-thumb-slate-600">{context.productoSeleccionado?.description.charAt(0).toUpperCase() + context.productoSeleccionado?.description.slice(1) || productDefault.description}</p>
                 <div className="flex justify-around mt-7">
-                  <p className="text-gray-800 font-bold text-2xl">Price: ${context.productoSeleccionado?.price || productDefault.price}</p>
+                  <p className="text-gray-800 font-bold text-2xl">Price: ${finalPrice || productDefault.price}</p>
                   <button
                     onClick={addProductsToCart}
                     className="bg-green-600 hover:bg-green-700 text-white w-3/6 font-bold py-2 px-4 rounded self-center">
