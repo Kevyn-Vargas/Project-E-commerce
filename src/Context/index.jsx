@@ -77,7 +77,12 @@ export const ShoppingCartProvider = ({ children }) => {
     return storedOrders ? JSON.parse(storedOrders) : [];
   });
 
-  //Aqui posiblemente vaya el de User, es practicamente replicar los anteriores.
+  //User(Datos del Usuario)
+
+  const [userData, setUserData] = useState(() => {
+    const storedUserData = localStorage.getItem("userData");
+    return storedUserData ? JSON.parse(storedUserData) : {};
+  });
 
 
   /*  De aqui en adelante se guarda en Local Storage al actualizar los datos (with con useEffect) */
@@ -93,7 +98,10 @@ export const ShoppingCartProvider = ({ children }) => {
     localStorage.setItem("order", JSON.stringify(order));
   }, [order]);
 
-  //Aqui posiblemente vaya el de User, es practicamente replicar los anteriores.
+  //User (Datos del Usuario)
+  useEffect(() => {
+    localStorage.setItem("userData", JSON.stringify(userData));
+  }, [userData]);
 
 
 
@@ -144,6 +152,8 @@ export const ShoppingCartProvider = ({ children }) => {
         selectedOptionMoney,
         currencyValueSelected,
         setCurrencyValueSelected,
+        userData,
+        setUserData,
       }}
     >
       {children}

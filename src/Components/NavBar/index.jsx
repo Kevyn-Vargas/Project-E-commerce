@@ -72,6 +72,9 @@ function NavBar() {
       </ul>
 
       <ul className="flex items-center gap-3">
+        {context.userData ? <li className="flex">
+          <h2>{context.userData.email}</h2>
+          <p className="text-white ml-2">|</p></li> : console.log("No user has been entered")}
         <li>
           <SelectMoney />
         </li>|
