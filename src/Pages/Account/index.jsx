@@ -30,9 +30,7 @@ function Account() {
   const logout = () => {
     // Lógica para cerrar sesión (aquí puedes limpiar la sesión de usuario y redirigir)
     alert('Logged out!');
-    context.setUserData()
-    // Por ejemplo, redirigir a la página de inicio
-    window.location.href = '/';
+    clearLocalStorage();
   };
   const passwordStar = context.userData?.password
     ? '*'.repeat(context.userData.password.length)

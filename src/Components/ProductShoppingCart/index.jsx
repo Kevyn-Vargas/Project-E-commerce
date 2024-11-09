@@ -8,14 +8,14 @@ function ProductShoppingCart(props) {
     const { increaseQuantity, decreaseQuantity } = useContext(ShoppingCartContext);
 
     return (
-        <div className="flex justify-between items-center bg-white px-14 py-5 rounded border-b-8">
+        <div className={`flex justify-between items-center bg-white px-14 py-5 rounded ${handleDelete ? "border-b-8" : ""}`}>
             <div className="flex items-center">
                 <figure className="w-40 h-40">
-                    <img src={imageUrl} alt={title} className="w-full h-full rounded-lg object-cover" />
+                    <img src={imageUrl} alt={title} className="w-full h-full rounded-lg object-cover"/>
                 </figure>
                 <div className=" w-full ml-10">
                     <h3 className="text-lg font-medium">{title}</h3>
-                    <div className='flex items-center'>
+                    <div className="flex items-center">
                         {
                             handleDelete ? (
                                 <>

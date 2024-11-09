@@ -20,6 +20,7 @@ function NotFound() {
           Go back to Home
         </a>
       </div>
+      <Footer />
     </Layout>
   )
 }

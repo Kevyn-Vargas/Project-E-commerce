@@ -5,6 +5,7 @@ import ProductDetails from "../../Components/ProductDetails";
 import { ShoppingCartContext } from "../../Context";
 import MnsjProductAdd from "../../Components/MnsjProductAdd";
 import { ExclamationCircleIcon } from '@heroicons/react/24/solid';
+import Footer from "../../Components/Footer";
 
 function Home() {
   const context = useContext(ShoppingCartContext);
@@ -68,6 +69,7 @@ function Home() {
         )
       }
       <ProductDetails />
+      <Footer />
     </Layout>
   );
 }

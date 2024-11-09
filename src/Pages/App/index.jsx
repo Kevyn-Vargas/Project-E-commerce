@@ -8,7 +8,6 @@ import Orders from "../Orders";
 import OrderLast from "../Order-last";
 import ShoppingCart from "../ShoppingCart";
 import NotFound from "../NotFound";
-import SingIn from "../SingIn";
 import Contact from "../Contact";
 import NavBar from "../../Components/NavBar";
 import Payment from "../Payment";
@@ -22,7 +21,6 @@ const AppRoutes = () => {
     { path: "/orders/last", element: <OrderLast /> },
     { path: "/orders/:id", element: <OrderLast /> },
     { path: "/shopping-cart", element: <ShoppingCart /> },
-    { path: "/sing-in", element: <SingIn /> },
     { path: "/contact", element: <Contact /> },
     { path: "/payment", element: <Payment/>},
     { path: "/*", element: <NotFound /> },
