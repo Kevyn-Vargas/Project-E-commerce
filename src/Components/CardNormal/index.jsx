@@ -51,7 +51,7 @@ function CardNormal({ data }) {
   }
 
   return (
-    <div className="bg-gradient-to-tr from-black to-gray-300 relative w-60 h-64 rounded-lg">
+    <div className="bg-gradient-to-tr from-black to-gray-300 relative w-60 h-64 -sm:mx-auto -sm:w-44 -sm:h-48 -md:w-52 -md:h-56 -md:mx-auto rounded-lg">
       <figure className="relative w-full h-full">
         <img className="w-full h-full object-cover rounded-lg mix-blend-multiply" src={imagen} alt="..." />
         <p className="flex flex-col items-end absolute top-5 right-5">

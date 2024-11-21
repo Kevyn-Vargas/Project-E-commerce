@@ -18,13 +18,13 @@ function NavBar() {
   }
 
   return (
-    <nav className="bg-black text-slate-300 flex justify-between items-center fixed z-1000 top-0 w-full py-5 px-8 font-medium text-base font-quicksand">
+    <nav className="bg-black text-slate-300 flex justify-between -sm:justify-center items-center fixed z-1000 top-0 w-full py-5 px-8 -sm:py-3 -sm:px-4 font-medium text-base font-quicksand -sm:text-xs -md:text-sm">
       {/*bg-teal-700*/}
       <ul className="flex items-center gap-3">
-        <li className="text-white font-semibold text-2xl">
+        <li className="text-white font-semibold text-2xl -sm:text-xs">
           <NavLink to="/">KVStore</NavLink>
         </li> |
-        <li>
+        <li className="-sm:hidden">
           <NavLink
             to="/"
             onClick={resetSearched}
@@ -33,7 +33,7 @@ function NavBar() {
             Home
           </NavLink>
         </li>
-        <li>
+        <li className="-sm:hidden -770:hidden">
           <NavLink
             to="/men's clothing"
             onClick={resetSearched}
@@ -42,7 +42,7 @@ function NavBar() {
             Men's
           </NavLink>
         </li>
-        <li>
+        <li className="-sm:hidden -770:hidden">
           <NavLink
             className={({ isActive }) => (isActive ? activeStyle : undefined)}
             to="/women's clothing"
@@ -51,7 +51,7 @@ function NavBar() {
             Women's
           </NavLink>
         </li>
-        <li>
+        <li className="-sm:hidden -770:hidden">
           <NavLink
             className={({ isActive }) => (isActive ? activeStyle : undefined)}
             to="/electronics"
@@ -60,7 +60,7 @@ function NavBar() {
             Electronics
           </NavLink>
         </li>
-        <li>
+        <li className="-sm:hidden -770:hidden">
           <NavLink
             className={({ isActive }) => (isActive ? activeStyle : undefined)}
             to="/jewelery"
@@ -72,10 +72,10 @@ function NavBar() {
       </ul>
 
       <ul className="flex items-center gap-3">
-        {context.userData ? <li className="flex">
+        {context.userData ? <li className="flex -sm:hidden -md:hidden">
           <h2>{context.userData.email}</h2>
           <p className="text-white ml-2">|</p></li> : console.log("No user has been entered")}
-        <li>
+        <li className="-sm:ml-2">
           <SelectMoney />
         </li>|
         <li>
@@ -84,25 +84,25 @@ function NavBar() {
             to="/account"
             onClick={resetSearched}
           >
-            <UserIcon className="size-6"></UserIcon>
-            <span className="px-1">Account</span>
+            <UserIcon className="size-6 -sm:size-4"></UserIcon>
+            <span className="px-1 -sm:px-0 -md:hidden">Account</span>
           </NavLink>
         </li>|
-        <li>
+        <li className="-sm:hidden">
           <NavLink
             className={({ isActive }) => (isActive ? activeStyle : undefined)}
             to="/orders"
             onClick={resetSearched}
-          >Orders
+          >Orders |
           </NavLink>
-        </li>|
+        </li>
         <li>
           <NavLink
             className="flex"
             to="/shopping-cart"
             onClick={resetSearched}
           >
-            <ShoppingCartIcon className="size-7 text-slate-300"></ShoppingCartIcon><span className="px-1">{container}</span>
+            <ShoppingCartIcon className="size-7 -sm:size-4 text-slate-300"></ShoppingCartIcon><span className="px-1">{container}</span>
           </NavLink>
         </li>
       </ul>

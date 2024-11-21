@@ -51,24 +51,24 @@ function ProductDetails() {
     >
       <div className={`fixed inset-0 bg-black/50 ${open ? 'block' : 'hidden'}`} />
       <div className={`fixed inset-0 flex justify-center items-center z-50 mt-6 -mb-10 ${open ? 'block' : 'hidden'}`}>
-        <div className=" flex bg-white rounded-lg p-8 w-3/4 h-3/4">
+        <div className=" flex bg-white rounded-lg p-8 w-3/4 h-3/4 -sm:w-5/6">
           <div className="flex justify-content-center">
             <div className="flex items-center">
               <img
                 src={context.productoSeleccionado?.image || productDefault.image}
                 alt="Product Image"
-                className="w-3/5 h-full object-contain rounden-lg mr-4"
+                className="w-3/5 -sm:w-1/2 -md:w-1/2 h-full object-contain rounden-lg mr-4"
               />
-              <div className="bg-gray-200 p-4 rounded-lg w-1/2 h-full flex flex-col">
-                <XMarkIcon onClick={handleClick} className="fixed top-[115px] right-[175px] size-6 p-1 text-white bg-red-600 rounded-lg cursor-pointer"></XMarkIcon>
-                <h2 className="text-xl font-bold">{context.productoSeleccionado?.title.charAt(0).toUpperCase() + context.productoSeleccionado?.title.slice(1) || productDefault.title}</h2>
-                <p className="text-slate-600 font-semibold text-sm">{context.productoSeleccionado?.category.charAt(0).toUpperCase() + context.productoSeleccionado?.category.slice(1) || productDefault.category}</p>
+              <div className="bg-gray-200 p-4 rounded-lg w-1/2 h-full flex flex-col -sm:text-xs">
+                <XMarkIcon onClick={handleClick} className="fixed top-24 -sm:top-16 -sm:right-4 right-6 size-6 p-1 text-white bg-red-600 rounded-lg cursor-pointer"></XMarkIcon>
+                <h2 className="text-xl font-bold -sm:text-sm">{context.productoSeleccionado?.title.charAt(0).toUpperCase() + context.productoSeleccionado?.title.slice(1) || productDefault.title}</h2>
+                <p className="text-slate-600 font-semibold text-sm -sm:text-xs">{context.productoSeleccionado?.category.charAt(0).toUpperCase() + context.productoSeleccionado?.category.slice(1) || productDefault.category}</p>
                 <p className="text-gray-600 my-4 h-auto overflow-y-auto scrollbar-track-transparent scrollbar-thin scrollbar-thumb-slate-600">{context.productoSeleccionado?.description.charAt(0).toUpperCase() + context.productoSeleccionado?.description.slice(1) || productDefault.description}</p>
-                <div className="flex justify-around mt-7">
-                  <p className="text-gray-800 font-bold text-2xl">Price: ${finalPrice || productDefault.price}</p>
+                <div className="flex justify-around mt-7 -sm:block -md:block">
+                  <p className="text-gray-800 font-bold text-2xl -sm:text-sm -md:text-lg">Price: ${finalPrice || productDefault.price}</p>
                   <button
                     onClick={addProductsToCart}
-                    className="bg-green-600 hover:bg-green-700 text-white w-3/6 font-bold py-2 px-4 rounded self-center">
+                    className="bg-green-600 hover:bg-green-700 text-white w-3/6 -sm:w-full -md:w-full font-bold py-2 px-4 rounded self-center">
                     Add to Cart
                   </button>
                 </div>

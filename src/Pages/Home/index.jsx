@@ -22,7 +22,7 @@ function Home() {
   return (
     <Layout>
       <input
-        className={`block w-1/3 rounded-md border border-slate-300 shadow-sm placeholder-slate-400
+        className={`block w-1/3 -sm:w-8/12 -sm:flex -sm:mx-auto -md:w-4/6 rounded-md border border-slate-300 shadow-sm placeholder-slate-400
           focus:outline-none focus:border-black pl-1 my-12 py-2 ${index ? 'bg-gray-300 cursor-not-allowed' : ''}`}
         type="text"
         placeholder="Search..."
@@ -38,7 +38,7 @@ function Home() {
         />
       )}
       
-      <div className="grid gap-7 grid-cols-4 w-full max-w-screen-lg">
+      <div className="grid gap-7 -sm:grid-cols-2 grid-cols-3 w-full max-w-screen-lg md:grid-cols-4">
         {
         index
          ? context.items?.filter(item => item.category === index).map((item) => (

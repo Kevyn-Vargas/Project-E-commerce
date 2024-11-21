@@ -42,7 +42,7 @@ function ShoppingCart() {
 
   return (
     <div className="pt-16 flex flex-col">
-      <div className="flex justify-items-center justify-evenly py-16">
+      <div className="flex justify-items-center justify-evenly py-16 -sm:flex-col -sm:items-center -sm:mx-auto -md:flex-col -md:items-center">
         {
           context.cartProducts.length === 0 ? (
             <div>
@@ -183,7 +183,7 @@ h78.747C231.693,100.736,232.77,106.162,232.77,111.694z"
             </div>
           ) :
             (
-              <div className="w-7/12 flex flex-col justify-evenly">
+              <div className="w-7/12 -sm:w-full -md:w-full flex flex-col justify-evenly">
                 {
                   context.cartProducts.map(product => (
                     <ProductShoppingCart
@@ -204,7 +204,7 @@ h78.747C231.693,100.736,232.77,106.162,232.77,111.694z"
           context.cartProducts.length === 0 ? (
             <></>
           ) : (
-            <div className="bg-white w-1/4 h-60 p-4 rounded">
+            <div className="bg-white w-1/4 -md:w-3/6 -sm:w-4/6 h-60 p-4 rounded">
               <h2 className="text-lg font-bold">Purchase summary</h2>
               <div className="flex justify-between my-1">
                 <span>Total</span>

@@ -21,7 +21,7 @@ function OrderLast() {
           <h1 className="ml-4">My Orders</h1>
         </Link>
       </div>
-      <div className="w-7/12 flex flex-col justify-evenly">
+      <div className="w-7/12 -sm:w-full -sm:block -sm:px-0 -md:block -md:w-full flex flex-col justify-evenly">
         {
           context.order?.[index]?.products.map(product => (
             <ProductShoppingCart
