@@ -38,7 +38,7 @@ function Home() {
         />
       )}
       
-      <div className="grid gap-7 -sm:grid-cols-2 grid-cols-3 w-full max-w-screen-lg md:grid-cols-4">
+      <div className="grid gap-7 -sm:grid-cols-2 grid-cols-3 -md:w-full -sm:w-full max-w-screen-lg md:grid-cols-4">
         {
         index
          ? context.items?.filter(item => item.category === index).map((item) => (
